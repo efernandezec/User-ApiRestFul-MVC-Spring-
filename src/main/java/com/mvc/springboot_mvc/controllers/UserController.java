@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.mvc.springboot_mvc.models.User;
 import com.mvc.springboot_mvc.services.UserService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -44,5 +48,17 @@ public class UserController {
 
         String fullname = userService.getFullName(id);
         return fullname;
+    }
+
+    @PutMapping("user/{id}")
+    public User updateUser(@PathVariable long id, @RequestBody User user) {    
+        User userUpdate= userService.update(id, user);
+        return userUpdate;
+    }
+
+    @DeleteMapping("user/{id}")
+    public void updateUser(@PathVariable long id) {    
+        userService.delete(id);
+        System.out.println("Deleted user");
     }
 }
