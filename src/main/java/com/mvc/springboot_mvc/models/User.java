@@ -19,6 +19,18 @@ public class User {
     public User() {
     }
 
+    
+
+    public User(String username, String lastname, Gender gender, Integer age, LocalDate datebirth) {
+        this.username = username;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.age = age;
+        this.datebirth = datebirth;
+    }
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,6 +54,10 @@ public class User {
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", lastname=" + lastname + ", gender=" + gender + ", age="
                 + age + ", datebirth=" + datebirth + "]";
+    }
+
+    public String getFullName(){
+        return this.username.concat(" ").concat(this.getLastname());
     }
 }
 

@@ -3,13 +3,12 @@ package com.mvc.springboot_mvc.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mvc.springboot_mvc.dto.UserDTO;
 import com.mvc.springboot_mvc.models.User;
-import com.mvc.springboot_mvc.repositorys.UserRepository;
+import com.mvc.springboot_mvc.repositories.UserRepository;
 
 @Service
 public class UserService {
@@ -23,7 +22,7 @@ public class UserService {
 
     public String getFullName(long userId){
         User user = userRepository.findById(userId).orElse(null);
-        String fullName = user.getUsername().concat(" ").concat(user.getLastname());
+        String fullName = user.getFullName();
         return fullName;
     }
     
@@ -34,7 +33,19 @@ public class UserService {
         return list;
     }
 
-    public User create(User user){
+    // Create sin UserDTO
+    // public User create(User user){
+    //     return userRepository.save(user);
+    // }
+
+    public User create(UserDTO userDTO){
+        User user = new User(
+            userDTO.getUsername(),
+            userDTO.getLastname(),
+            userDTO.getGender(),
+            userDTO.getAge(),
+            userDTO.getDatebirth()
+            );
         return userRepository.save(user);
     }
 

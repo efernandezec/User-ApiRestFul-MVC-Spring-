@@ -3,6 +3,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mvc.springboot_mvc.dto.UserDTO;
 import com.mvc.springboot_mvc.models.User;
 import com.mvc.springboot_mvc.services.UserService;
 
@@ -24,14 +26,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create")
-    public User create(@RequestBody User user) {
-        System.out.println(user.toString());
-        User newUser = userService.create(user);
+    // Post sin UserDTO
+    // @PostMapping("/user")
+    // public User create(@RequestBody User user) {
+    //     System.out.println(user.toString());
+    //     User newUser = userService.create(user);
+    //     return newUser;
+    // }
+
+    @PostMapping("/user")
+    public User create(@RequestBody UserDTO userDTO) {
+        System.out.println(userDTO.toString());
+        User newUser = userService.create(userDTO);
         return newUser;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     public List<User> users() {
         List<User> users = userService.list();
         return users;
@@ -43,7 +53,7 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/user/fullname/{id}")
+    @GetMapping("/user/{id}/fullname")
     public String fullName(@PathVariable long id) {
 
         String fullname = userService.getFullName(id);

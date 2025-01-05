@@ -1,4 +1,4 @@
-package com.mvc.springboot_mvc.repositorys;
+package com.mvc.springboot_mvc.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
